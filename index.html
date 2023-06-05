@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="Estilos.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+  <div class="login-page">
+    <div class="form">
+      <form class="login-form" onsubmit="login(event)">
+        <input name="email" required type="email" placeholder="correo" oninput="clearError()" />
+        <input name="password" required type="password" placeholder="contraseña" oninput="clearError()" />
+        <button>login</button>
+        <p class="message text-red d-none" id="error">Correo o contraseña inválido</p>
+      </form>
+    </div>
+  </div>
+  <script>
+    const loginValue = localStorage.getItem("login")
+    if (loginValue === "true") {
+      window.location.href = `${window.location.origin}/shop.html`
+    }
+
+    function clearError() {
+      const errorElement = document.getElementById("error")
+      errorElement.classList.add("d-none")
+    }
+
+    function login(event) {
+      event.preventDefault()
+      const email = event.target.email.value
+      const password = event.target.password.value
+      const correctEmail = "admin@gmail.com"
+      const correctPassword = "123456"
+
+      if (email !== correctEmail || password !== correctPassword) {
+        const errorElement = document.getElementById("error")
+        errorElement.classList.remove("d-none")
+        return
+      }
+
+      localStorage.setItem("login", "true")
+      window.location.href = `${window.location.origin}/shop.html`
+    }
+  </script>
+
+</body>
+
+</html>
